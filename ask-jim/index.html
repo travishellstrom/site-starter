@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Search Your Name's Reddit comments</title>
+  <meta name="description" content="Search every public Reddit comment Your Name has written. Type a word or a question and read what they said, with a link to the original thread.">
+  <link rel="canonical" href="https://example.com/ask/">
+  <style>
+    :root { --bg:#faf8f4; --ink:#1f1f1f; --muted:#5c5c5c; --accent:#0b5cad; --rule:#ddd8cf; --mark:#fff2a8; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#151515; --ink:#eee; --muted:#a8a8a8; --accent:#7db7f5; --rule:#333; --mark:#5a4d00; }
+    }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:18px/1.6 Georgia,"Times New Roman",serif; }
+    main { max-width:42rem; margin:0 auto; padding:2.5rem 20px 4rem; }
+    h1 { font-size:2rem; line-height:1.2; margin:0 0 .4rem; }
+    p { margin:.6rem 0; }
+    .muted { color:var(--muted); }
+    form { display:flex; gap:.6rem; flex-wrap:wrap; margin:1.4rem 0 .6rem; }
+    input[type=search] { flex:1 1 14rem; font:inherit; padding:.6rem .8rem; border:1px solid var(--rule); border-radius:6px; background:transparent; color:inherit; }
+    select, button { font:inherit; padding:.6rem .8rem; border:1px solid var(--rule); border-radius:6px; background:transparent; color:inherit; }
+    button { cursor:pointer; background:var(--accent); border-color:var(--accent); color:#fff; }
+    #status { color:var(--muted); font-size:.95rem; margin:.8rem 0; }
+    article { border-top:1px solid var(--rule); padding:1rem 0; }
+    article p { margin:.4rem 0; white-space:pre-wrap; }
+    .meta { color:var(--muted); font-size:.9rem; }
+    mark { background:var(--mark); color:inherit; }
+    a { color:var(--accent); }
+  </style>
+</head>
+<body>
+<main>
+  <p><a href="/">Home</a></p>
+  <h1>Search Your Name's Reddit comments</h1>
+  <p class="muted">Every comment is a public Reddit comment written by Your Name. Search by a word, a topic or a phrase. Each result links to the original thread on Reddit. This is a plain keyword search, not an AI.</p>
+
+  <form id="form" role="search">
+    <input id="q" type="search" placeholder="For example: first trip, giving, safety" aria-label="Search comments" autofocus>
+    <select id="sub" aria-label="Subreddit"><option value="">All subreddits</option></select>
+    <button type="submit">Search</button>
+  </form>
+
+  <div id="status" aria-live="polite">Loading comments...</div>
+  <div id="results"></div>
+</main>
+
+<script>
+(function () {
+  var comments = [];
+  var PAGE = 20;
+  var shown = 0;
+  var current = [];
+
+  var form = document.getElementById("form");
+  var qEl = document.getElementById("q");
+  var subEl = document.getElementById("sub");
+  var statusEl = document.getElementById("status");
+  var resultsEl = document.getElementById("results");
+
+  function words(s) {
+    return (s.toLowerCase().match(/[\p{L}\p{N}']+/gu) || []).filter(function (w) { return w.length > 1; });
+  }
+  function esc(s) {
+    return s.replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function escRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+  function safeLink(u) { return /^https:\/\/(www\.|old\.)?reddit\.com\//.test(u) ? u : ""; }
+
+  function highlight(text, terms) {
+    var out = esc(text);
+    if (!terms.length) return out;
+    var re = new RegExp("(" + terms.map(function (t) { return escRe(esc(t)); }).join("|") + ")", "gi");
+    return out.replace(re, "<mark>$1</mark>");
+  }
+
+  function search(query, sub) {
+    var terms = words(query);
+    var phrase = query.trim().toLowerCase();
+    var list = comments.filter(function (c) { return !sub || c.subreddit === sub; });
+    if (!terms.length) return { terms: terms, hits: list };
+    var scored = [];
+    list.forEach(function (c) {
+      var t = c.text.toLowerCase();
+      var score = 0, matched = 0;
+      terms.forEach(function (w) {
+        var n = t.split(w).length - 1;
+        if (n) { matched++; score += 1 + Math.min(n, 3) * 0.25; }
+      });
+      if (!matched) return;
+      if (matched === terms.length) score += 2;
+      if (terms.length > 1 && t.indexOf(phrase) !== -1) score += 3;
+      scored.push({ c: c, s: score });
+    });
+    scored.sort(function (a, b) { return b.s - a.s || (b.c.date > a.c.date ? 1 : -1); });
+    return { terms: terms, hits: scored.map(function (x) { return x.c; }) };
+  }
+
+  function render(more) {
+    if (!more) { resultsEl.innerHTML = ""; shown = 0; }
+    var terms = words(qEl.value);
+    var slice = current.slice(shown, shown + PAGE);
+    slice.forEach(function (c) {
+      var a = document.createElement("article");
+      var link = safeLink(c.link);
+      a.innerHTML =
+        "<p class='meta'>" + esc(c.date) + (c.subreddit ? " &middot; r/" + esc(c.subreddit) : "") +
+        (link ? " &middot; <a href='" + esc(link) + "' rel='noopener'>View on Reddit</a>" : "") + "</p>" +
+        "<p>" + highlight(c.text, terms) + "</p>";
+      resultsEl.appendChild(a);
+    });
+    shown += slice.length;
+    var old = document.getElementById("more");
+    if (old) old.remove();
+    if (shown < current.length) {
+      var b = document.createElement("button");
+      b.id = "more"; b.type = "button"; b.textContent = "Show more";
+      b.onclick = function () { render(true); };
+      resultsEl.appendChild(b);
+    }
+  }
+
+  function run() {
+    var res = search(qEl.value, subEl.value);
+    current = res.hits;
+    if (!qEl.value.trim()) {
+      statusEl.textContent = current.length + " comments, newest first.";
+    } else if (!current.length) {
+      statusEl.textContent = "No comments matched. Try a shorter or different word.";
+    } else {
+      statusEl.textContent = current.length + " comment" + (current.length === 1 ? "" : "s") + " matched, best matches first.";
+    }
+    render(false);
+    var u = new URL(location.href);
+    if (qEl.value.trim()) u.searchParams.set("q", qEl.value.trim()); else u.searchParams.delete("q");
+    history.replaceState(null, "", u);
+  }
+
+  form.addEventListener("submit", function (e) { e.preventDefault(); run(); });
+  subEl.addEventListener("change", run);
+
+  fetch("comments.json")
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (data) {
+      comments = data;
+      var subs = {};
+      comments.forEach(function (c) { if (c.subreddit) subs[c.subreddit] = (subs[c.subreddit] || 0) + 1; });
+      Object.keys(subs).sort(function (a, b) { return subs[b] - subs[a]; }).forEach(function (s) {
+        var o = document.createElement("option");
+        o.value = s; o.textContent = "r/" + s + " (" + subs[s] + ")";
+        subEl.appendChild(o);
+      });
+      var start = new URL(location.href).searchParams.get("q");
+      if (start) qEl.value = start;
+      run();
+    })
+    .catch(function () {
+      statusEl.textContent = "The comments file could not be loaded. If you opened this page from your computer, serve the folder instead (see EXPORT.md).";
+    });
+})();
+</script>
+</body>
+</html>

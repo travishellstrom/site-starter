@@ -13,6 +13,9 @@ The idea: one site under your own name, on a domain you control, that people and
 | `robots.txt` | Lets search engines and AI crawlers read the site, and points to the sitemap. |
 | `sitemap.xml` | The list of pages on your site. Add a line for each new page. |
 | `AGENTS.md` | Instructions for an AI assistant that is helping you edit this site. |
+| `about/index.html` | A fill-in About page, with structured data for a person and their organizations. |
+| `ask-jim/` | A search page over your own Reddit comments, with the steps to export them. Rename it to suit. |
+| `docs/` | Short guides, listed under "Guides" below. |
 
 Every name, address and sentence in these files is a placeholder. Replace `Your Name` and `example.com` with your own.
 
@@ -20,7 +23,7 @@ Every name, address and sentence in these files is a placeholder. Replace `Your 
 
 - **You own it.** The files are in your GitHub account and the domain is registered to you. Moving to another host later means pointing the domain somewhere else.
 - **It is free to host.** Cloudflare serves static sites at no cost. You pay only for the domain, usually about $10 a year.
-- **One site, not many.** One site under your own name is easier to keep up and easier for people and search engines to find than many small ones. If you already own several domains, pick one as the main site and forward the others to it.
+- **One site, not many.** One site under your own name is easier to keep up and easier for people and search engines to find than many small ones. If you own more than one domain, pick one as the main site and forward the others to it. The checklist in `docs/domains.md` walks through that.
 - **AI can find it.** A plain HTML page with real text is easy for search engines and AI assistants to read. The `llms.txt` file gives them a short summary and a list of your best pages.
 
 ## Set it up
@@ -60,6 +63,13 @@ From now on, every change you save to GitHub is published automatically within a
 - Make sure `https://your-domain/llms.txt`, `https://your-domain/robots.txt` and `https://your-domain/sitemap.xml` open in a browser.
 - Add your domain in Google Search Console at https://search.google.com/search-console and submit the sitemap.
 - Keep `llms.txt` current. When you add an important page, add a line for it.
+
+## Guides
+
+- `docs/domains.md`: a checklist for pointing several domains at one main site.
+- `docs/about-page.md`: how to fill in `about/index.html` so search engines and AI assistants describe you and your organizations accurately.
+- `docs/interviews-to-clips.md`: turning a recorded interview into a full interview page and short captioned clips.
+- `ask-jim/EXPORT.md`: exporting your Reddit comments and publishing a search page for them.
 
 ## Keeping it simple
 

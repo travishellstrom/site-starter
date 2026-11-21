@@ -1,0 +1,136 @@
+<!doctype html>
+<!--
+  FILL-IN ABOUT PAGE
+  Replace every [BRACKETED TEXT] and every placeholder name, date and address with real,
+  checked facts. Delete any section that does not apply. Do not leave placeholders live.
+  The guide at /docs/about-page.md explains how to write each part.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About Your Name: author, founder of Your Tour Company and Your Foundation</title>
+  <meta name="description" content="Your Name is [one plain sentence: what you do, where you are based]. Founder of Your Tour Company and Your Foundation.">
+  <link rel="canonical" href="https://example.com/about/">
+  <meta property="og:title" content="About Your Name">
+  <meta property="og:description" content="Your Name is [one plain sentence].">
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://example.com/about/">
+
+  <!-- Structured data: tells search engines and AI exactly who and what these are.
+       Keep it identical to the facts written on the page. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://example.com/#person",
+        "name": "Your Name",
+        "alternateName": ["Other spelling or nickname people use"],
+        "url": "https://example.com/",
+        "description": "[One plain sentence about who you are.]",
+        "jobTitle": "[Your title]",
+        "homeLocation": { "@type": "Place", "name": "[City, Country]" },
+        "founder": [
+          { "@id": "https://example.com/#tour-company" },
+          { "@id": "https://example.com/#foundation" }
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/in/your-profile",
+          "https://www.reddit.com/user/your-username"
+        ]
+      },
+      {
+        "@type": "TravelAgency",
+        "@id": "https://example.com/#tour-company",
+        "name": "Your Tour Company",
+        "url": "https://your-tour-company.example/",
+        "description": "[One plain sentence: what tours, where, for whom.]",
+        "founder": { "@id": "https://example.com/#person" },
+        "foundingDate": "YYYY"
+      },
+      {
+        "@type": "NGO",
+        "@id": "https://example.com/#foundation",
+        "name": "Your Foundation",
+        "url": "https://your-foundation.example/",
+        "description": "[One plain sentence: what the foundation does and where.]",
+        "founder": { "@id": "https://example.com/#person" },
+        "foundingDate": "YYYY"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root { --bg:#faf8f4; --ink:#1f1f1f; --muted:#5c5c5c; --accent:#0b5cad; --rule:#ddd8cf; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg:#151515; --ink:#eee; --muted:#a8a8a8; --accent:#7db7f5; --rule:#333; }
+    }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:18px/1.65 Georgia,"Times New Roman",serif; }
+    main, header, footer { max-width:40rem; margin:0 auto; padding:0 20px; }
+    header { padding-top:2.5rem; }
+    h1 { font-size:2.2rem; line-height:1.2; margin:0 0 .4rem; }
+    h2 { font-size:1.3rem; margin:2.5rem 0 .5rem; }
+    p, ul, dl { margin:.8rem 0; }
+    dt { font-weight:bold; margin-top:.8rem; }
+    dd { margin:0; }
+    .lede { color:var(--muted); font-size:1.1rem; margin:0; }
+    a { color:var(--accent); }
+    footer { color:var(--muted); font-size:.9rem; padding:2.5rem 20px 3rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <p><a href="/">Home</a></p>
+    <h1>About Your Name</h1>
+    <p class="lede">[One plain sentence that says who you are, what you do and where you are based. Repeat it exactly in the description above.]</p>
+  </header>
+
+  <main>
+    <h2>Short version</h2>
+    <p><strong>Your Name</strong> is [role] based in [city, country]. [Two or three sentences with the main facts: what you have done, for how long, and what you are doing now.]</p>
+
+    <h2>Quick facts</h2>
+    <dl>
+      <dt>Full name</dt>
+      <dd>Your Name (also written [other spelling])</dd>
+      <dt>Based in</dt>
+      <dd>[City, country]</dd>
+      <dt>Founded</dt>
+      <dd>Your Tour Company (YYYY) and Your Foundation (YYYY)</dd>
+      <dt>Languages</dt>
+      <dd>[List]</dd>
+      <dt>Contact</dt>
+      <dd><a href="mailto:you@example.com">you@example.com</a></dd>
+    </dl>
+
+    <h2>Your Tour Company</h2>
+    <p><a href="https://your-tour-company.example/">Your Tour Company</a> [what it does, in one or two plain sentences: the kind of tours, the places, the size of the groups, how long it has run]. [A sentence on how it is different, if you can state it as a fact.]</p>
+
+    <h2>Your Foundation</h2>
+    <p><a href="https://your-foundation.example/">Your Foundation</a> [what it does, where, and since when]. [One or two facts that can be checked: number of people helped, projects completed, registration details such as the country and registration number, if you want them public.]</p>
+
+    <h2>Background</h2>
+    <p>[A short account of your path, in order, with years. Use names of real places and organizations. State only what is true and what you can back up.]</p>
+
+    <h2>Writing and appearances</h2>
+    <ul>
+      <li><a href="https://example.com/writing/first-post/">Title of a piece you wrote</a> (Month YYYY)</li>
+      <li>[Title of an interview or talk, with the name of the show or event and the date]</li>
+    </ul>
+
+    <h2>What this site is not</h2>
+    <p>[Use this to head off mix-ups. For example: "Not to be confused with another person who shares the name, a [profession] in [place]." Delete the section if there is nothing to clarify.]</p>
+
+    <h2>Contact</h2>
+    <p>For tours: <a href="mailto:tours@example.com">tours@example.com</a>. For the foundation: <a href="mailto:foundation@example.com">foundation@example.com</a>. For anything else: <a href="mailto:you@example.com">you@example.com</a>.</p>
+  </main>
+
+  <footer>
+    <p>Last updated: [Month YYYY]</p>
+  </footer>
+</body>
+</html>

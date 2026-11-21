@@ -1,0 +1,23 @@
+[
+  {
+    "id": "example3",
+    "date": "2024-03-02",
+    "subreddit": "ExampleTravel",
+    "link": "https://www.reddit.com/r/ExampleTravel/",
+    "text": "Sample comment three. Replace this file with your own comments.json. When it is a good time of year to visit depends on what you want to see, so I would start by deciding that."
+  },
+  {
+    "id": "example2",
+    "date": "2023-09-18",
+    "subreddit": "ExampleTravel",
+    "link": "https://www.reddit.com/r/ExampleTravel/",
+    "text": "Sample comment two. For a first trip I would book fewer places and stay longer in each one. You see more by moving less."
+  },
+  {
+    "id": "example1",
+    "date": "2022-06-11",
+    "subreddit": "ExampleCharity",
+    "link": "https://www.reddit.com/r/ExampleCharity/",
+    "text": "Sample comment one. Before giving to any group, ask how they report what they spend and who checks it."
+  }
+]
