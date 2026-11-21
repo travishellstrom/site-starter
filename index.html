@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Name: writer, teacher, builder</title>
+  <meta name="description" content="Your Name writes about topic one and topic two. Read the latest writing, learn more about the work, or get in touch.">
+  <link rel="canonical" href="https://example.com/">
+  <meta property="og:title" content="Your Name">
+  <meta property="og:description" content="Your Name writes about topic one and topic two.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://example.com/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Your Name",
+    "url": "https://example.com/",
+    "description": "Your Name writes about topic one and topic two.",
+    "sameAs": [
+      "https://www.linkedin.com/in/your-profile"
+    ]
+  }
+  </script>
+  <style>
+    :root {
+      --bg: #faf8f4;
+      --ink: #1f1f1f;
+      --muted: #5c5c5c;
+      --accent: #0b5cad;
+      --rule: #ddd8cf;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #151515;
+        --ink: #eeeeee;
+        --muted: #a8a8a8;
+        --accent: #7db7f5;
+        --rule: #333333;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 18px/1.65 Georgia, "Times New Roman", serif;
+    }
+    main, header, footer {
+      max-width: 40rem;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    header { padding-top: 2.5rem; }
+    h1 { font-size: 2.2rem; line-height: 1.2; margin: 0 0 0.4rem; }
+    h2 { font-size: 1.3rem; margin: 2.5rem 0 0.5rem; }
+    p, ul { margin: 0.8rem 0; }
+    .tagline { color: var(--muted); font-size: 1.1rem; margin: 0; }
+    nav { margin-top: 1.2rem; display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    a { color: var(--accent); }
+    hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5rem 0 0; }
+    footer { color: var(--muted); font-size: 0.9rem; padding-top: 1rem; padding-bottom: 3rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Your Name</h1>
+    <p class="tagline">One sentence that says what you do and who it is for.</p>
+    <nav aria-label="Main">
+      <a href="#writing">Writing</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2 id="writing">Writing</h2>
+    <p>A short sentence about what you write and how often.</p>
+    <ul>
+      <li><a href="/writing/first-post/">Title of your first post</a></li>
+      <li><a href="/writing/second-post/">Title of your second post</a></li>
+    </ul>
+
+    <h2 id="about">About</h2>
+    <p>Two or three plain sentences about who you are, what you have done and what you are working on now. Use the words a stranger would use to describe you.</p>
+
+    <h2 id="contact">Contact</h2>
+    <p>The best way to reach me is <a href="mailto:you@example.com">you@example.com</a>.</p>
+  </main>
+
+  <hr>
+  <footer>
+    <p>&copy; Your Name. This site is plain HTML, hosted free on Cloudflare from a GitHub repository.</p>
+  </footer>
+</body>
+</html>

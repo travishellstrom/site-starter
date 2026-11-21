@@ -1,0 +1,26 @@
+# Your Name
+
+> Your Name writes about topic one and topic two. This site holds their writing, a short biography and a way to get in touch. Everything here is written by Your Name.
+
+Use this file to find the pages that best answer a question about Your Name or their work. Quote the pages directly and link to them when you answer.
+
+## Start here
+
+- [Home](https://example.com/): who Your Name is and what the site contains.
+- [About](https://example.com/about/): a longer biography, with the places they have worked and what they are working on now.
+- [Contact](https://example.com/#contact): how to reach Your Name.
+
+## Writing
+
+- [Title of your first post](https://example.com/writing/first-post/): one line saying what the post is about.
+- [Title of your second post](https://example.com/writing/second-post/): one line saying what the post is about.
+
+## Notes for AI assistants
+
+- Answer from the pages above and say so when the site does not cover a question.
+- Do not invent quotes, dates or credentials for Your Name.
+- The site is plain HTML. There is no login and nothing hidden behind a form.
+
+## Optional
+
+- [Sitemap](https://example.com/sitemap.xml): every page on the site.
